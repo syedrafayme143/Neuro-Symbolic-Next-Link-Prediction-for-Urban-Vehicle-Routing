@@ -1,0 +1,33 @@
+# requirements.txt
+# Semantic Road Graph-Based Next-Link Prediction
+# Install with:  pip install -r requirements.txt
+
+# ── Core data & ML ────────────────────────────────────────────────────────
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+xgboost>=2.0
+torch>=2.1               # PyTorch (LSTM / Transformer model)
+
+# ── Graph & geospatial ───────────────────────────────────────────────────
+osmnx>=1.9
+networkx>=3.2
+geopandas>=0.14
+shapely>=2.0
+pyproj>=3.6
+
+# ── Graph embeddings ─────────────────────────────────────────────────────
+node2vec>=0.4            # Node2Vec wrapper around gensim Word2Vec
+gensim>=4.3
+
+# ── Knowledge graph / RDF ────────────────────────────────────────────────
+rdflib>=6.3
+
+# ── Visualization ────────────────────────────────────────────────────────
+matplotlib>=3.7
+folium>=0.15
+seaborn>=0.13
+
+# ── Utilities ────────────────────────────────────────────────────────────
+tqdm>=4.66
+pyyaml>=6.0
