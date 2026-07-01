@@ -1,0 +1,68 @@
+# config.yaml
+# Centralized hyperparameters for the Semantic Road Graph-Based
+# Next-Link Prediction project.
+
+# ── Phase 1: Graph Construction ────────────────────────────────────────────
+graph:
+  location: "Ingolstadt, Germany"
+  network_type: "drive"        # OSMnx network type
+  simplify: true               # Merge non-intersection nodes
+
+# ── Phase 2: Synthetic Trajectories ────────────────────────────────────────
+trajectories:
+  num_trajectories: 5000
+  min_path_nodes: 3            # Discard paths shorter than this
+  max_sample_attempts: 20      # Retries before skipping a source/target pair
+  random_seed: 42
+
+# ── Phase 3: GPS Noise Simulation ──────────────────────────────────────────
+gps_noise:
+  noise_levels:                # Standard deviation in metres
+    low_5m: 5
+    medium_10m: 10
+    high_20m: 20
+  random_seed: 42
+
+# ── Phase 4: Map Matching ───────────────────────────────────────────────────
+map_matching:
+  method: "nearest_edge"       # Geometric baseline
+  max_candidates: 5
+
+# ── Phase 5/6: Knowledge Graph & Embeddings ────────────────────────────────
+embeddings:
+  node2vec:
+    dimensions: 64
+    walk_length: 30
+    num_walks: 200
+    p: 1.0                     # Return parameter
+    q: 1.0                     # In-out parameter
+    window: 10
+    min_count: 1
+    workers: 4
+    seed: 42
+
+# ── Phase 7: Model Training ─────────────────────────────────────────────────
+training:
+  test_size: 0.2
+  val_size: 0.1
+  random_seed: 42
+  xgboost:
+    n_estimators: 300
+    max_depth: 6
+    learning_rate: 0.05
+    subsample: 0.8
+  lstm:
+    hidden_size: 128
+    num_layers: 2
+    dropout: 0.2
+    batch_size: 64
+    epochs: 30
+    learning_rate: 0.001
+
+# ── Phase 8: Evaluation ─────────────────────────────────────────────────────
+evaluation:
+  metrics:
+    - top1_accuracy
+    - top3_accuracy
+    - invalid_transition_rate
+    - mean_latency_ms
