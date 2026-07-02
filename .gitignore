@@ -222,3 +222,7 @@ __marimo__/
 #data
 data/
 cache/
+.json
+.pkl
+.ttl
+venv/
